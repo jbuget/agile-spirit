@@ -68,8 +68,14 @@ a.deleteLink { background-image: url(../img/delete.png); background-repeat: no-r
 
 /* --- User List Page --- */
 .userList {  }
-.userList table { border: collapse; cellpadding: 0; border: 1px solid #999; line-height: 21px; }
-.userList table thead { background-color: #F0F0F0; }
-.userList table tbody tr:hover {background-color:red;}
-.userList table td { padding: 0 5px; line-height: 25px; }
+.userList table { border: collapse; cellpadding: 0; border-bottom: 1px solid #999; }
+.userList table thead { background-color: #DF6902; color: #FFF; }
+.userList table thead tr { border: 1px solid #DF6902; } /* a) */
+.userList table tbody tr { border-top: 1px solid #DEDEDE; border-right: 1px solid #999; border-left: 1px solid #999; } /* b) */
+/* To remove table left-right borders, comment a) and b) and uncomment c) and d) */ 
+/* .userList table thead tr { line-height: 30px; border: 1px 0 solid #DF6902; } c) */
+/* .userList table tbody tr { border-top: 1px solid #DEDEDE; } d) */
+.userList table tbody tr:hover {background-color: #F1F1F1; }
+.userList table th { height: 32px; vertical-align: middle; }
+.userList table td { padding: 0 5px; height: 28px; vertical-align: middle; }
 
