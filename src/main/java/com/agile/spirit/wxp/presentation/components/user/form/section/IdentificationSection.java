@@ -26,11 +26,7 @@ public class IdentificationSection extends UserFormSection implements PasswordCo
   public IdentificationSection(String id, IModel<User> model, boolean isCreationMode) {
     super(id, "identificationFeedback", model);
     this.isCreationMode = isCreationMode;
-  }
 
-  @Override
-  protected void onInitialize() {
-    super.onInitialize();
     buildEmailInput();
     buildPasswordInput();
     buildConfirmationInput();

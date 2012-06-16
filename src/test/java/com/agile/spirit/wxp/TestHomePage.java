@@ -4,7 +4,7 @@ import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.agile.spirit.wxp.Application;
+import com.agile.spirit.wxp.WicketApplication;
 import com.agile.spirit.wxp.presentation.pages.user.list.UserListPage;
 
 /**
@@ -17,7 +17,7 @@ public class TestHomePage
   @Before
   public void setUp()
   {
-    tester = new WicketTester(new Application());
+    tester = new WicketTester(new WicketApplication());
   }
 
   @Test

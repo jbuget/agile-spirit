@@ -16,11 +16,6 @@ public class GtuSection extends UserFormSection {
 
   public GtuSection(String id, IModel<User> model) {
     super(id, "gtuFeedback", model);
-  }
-
-  @Override
-  protected void onInitialize() {
-    super.onInitialize();
     buildGtuInput();
   }
 

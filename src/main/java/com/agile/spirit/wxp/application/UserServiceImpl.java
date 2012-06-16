@@ -3,6 +3,9 @@ package com.agile.spirit.wxp.application;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.agile.spirit.wxp.domain.Country;
+import com.agile.spirit.wxp.domain.Gender;
+import com.agile.spirit.wxp.domain.Nationality;
 import com.agile.spirit.wxp.domain.User;
 
 public class UserServiceImpl implements UserService {
@@ -22,16 +25,60 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public List<User> find(String filter) {
+  public List<User> find(UserSearchCriteria criteria) {
+    if (criteria == null || criteria.isEmpty()) {
+      return new ArrayList<User>(list);
+    }
     List<User> result = new ArrayList<User>();
-    if (filter != null && !filter.isEmpty()) {
-      for (User user : list) {
-        if (filter.equalsIgnoreCase(user.getEmail()) || filter.equalsIgnoreCase(user.getFirstName()) || filter.equalsIgnoreCase(user.getLastName())) {
-          result.add(user);
-        }
+    for (User user : list) {
+      boolean isUserMatching = matchName(criteria.getName(), user) && matchGender(criteria.getGender(), user)
+          && matchNationality(criteria.getNationality(), user) && matchCountry(criteria.getCountry(), user);
+      if (isUserMatching) {
+        result.add(user);
       }
     }
-    return list;
+    return result;
+  }
+
+  private boolean matchName(String name, User user) {
+    if (name != null) {
+      if (user.getEmail().toUpperCase().contains(name.toUpperCase()) || user.getFirstName().toUpperCase().contains(name.toUpperCase())
+          || user.getLastName().toUpperCase().contains(name.toUpperCase())) {
+        return true;
+      }
+      return false;
+    }
+    return true;
+  }
+
+  private boolean matchGender(Gender gender, User user) {
+    if (gender != null) {
+      if (gender == user.getGender()) {
+        return true;
+      }
+      return false;
+    }
+    return true;
+  }
+
+  private boolean matchNationality(Nationality nationality, User user) {
+    if (nationality != null) {
+      if (nationality == user.getNationality()) {
+        return true;
+      }
+      return false;
+    }
+    return true;
+  }
+
+  private boolean matchCountry(Country country, User user) {
+    if (country != null) {
+      if (country == user.getCountry()) {
+        return true;
+      }
+      return false;
+    }
+    return true;
   }
 
   @Override
@@ -39,6 +86,18 @@ public class UserServiceImpl implements UserService {
     if (id != null) {
       for (User user : list) {
         if (user.getId().equals(id)) {
+          return user;
+        }
+      }
+    }
+    return null;
+  }
+
+  @Override
+  public User getByEmail(String email) {
+    if (email != null) {
+      for (User user : list) {
+        if (user.getEmail().equals(email)) {
           return user;
         }
       }
@@ -82,6 +141,17 @@ public class UserServiceImpl implements UserService {
       }
     }
     return false;
+  }
+
+  @Override
+  public User authenticate(String email, String password) {
+    User user = UserServiceImpl.getInstance().getByEmail(email);
+    if (user != null) {
+      if (password.equals(user.getPassword())) {
+        return user;
+      }
+    }
+    return null;
   }
 
 }

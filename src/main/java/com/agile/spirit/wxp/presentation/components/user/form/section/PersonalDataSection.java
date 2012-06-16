@@ -40,11 +40,6 @@ public class PersonalDataSection extends UserFormSection {
 
   public PersonalDataSection(String id, IModel<User> user) {
     super(id, "personalDataFeedback", user);
-  }
-
-  @Override
-  protected void onInitialize() {
-    super.onInitialize();
 
     buildFirstNameInput();
     buildLastNameInput();

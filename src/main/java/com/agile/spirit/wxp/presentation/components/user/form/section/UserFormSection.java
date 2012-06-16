@@ -3,14 +3,14 @@ package com.agile.spirit.wxp.presentation.components.user.form.section;
 import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
 import org.apache.wicket.feedback.IFeedbackMessageFilter;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
-import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 
+import com.agile.spirit.wxp.WicketPanel;
 import com.agile.spirit.wxp.domain.User;
 
 
-public abstract class UserFormSection extends Panel {
+public abstract class UserFormSection extends WicketPanel {
 
   private static final long serialVersionUID = 1L;
 
@@ -22,11 +22,7 @@ public abstract class UserFormSection extends Panel {
     super(id);
     this.setDefaultModel(new CompoundPropertyModel<User>(model));
     this.feedbackPanelId = feedbackPanelId;
-  }
 
-  @Override
-  protected void onInitialize() {
-    super.onInitialize();
     buildFeedbackPanel();
   }
 

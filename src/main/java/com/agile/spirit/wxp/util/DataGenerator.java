@@ -13,8 +13,21 @@ public class DataGenerator {
 
   private final static Random random = new Random();
 
-  public static void generateData() {
-    for (int i = 0 ; i < 100 ; i++) {
+  public static void generateData(int rowsNumber) {
+    // Generate Admin user
+    User admin = new User();
+    admin.setFirstName("Chuck");
+    admin.setLastName("Noris");
+    admin.setGender(Gender.MALE);
+    admin.setNationality(Nationality.OTHER);
+    admin.setCountry(Country.OTHER);
+    admin.setArea("Texas");
+    admin.setPassport("N/A");
+    admin.setEmail("admin@agile-spirit.fr");
+    admin.setPassword("admin");
+    UserServiceImpl.getInstance().saveOrUpdate(admin);
+
+    for (int i = 0 ; i < rowsNumber - 1 ; i++) {
       User user = new User();
       user.setFirstName(generateRandomString());
       user.setLastName(generateRandomString());
